@@ -1,0 +1,1140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Naxis Capital - Turn-Key Blockchain Infrastructure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0B1622;
+            --secondary: #0E1C2F;
+            --text: #E6EDF3;
+            --text-muted: #BFC9D6;
+            --accent: #1ED3B5;
+            --accent-hover: #18BFA8;
+            --cta: #C9A24D;
+            --cta-hover: #B8923B;
+            --border: rgba(30, 211, 181, 0.15);
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--primary);
+            color: var(--text);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            background: rgba(11, 22, 34, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid var(--border);
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.5rem 20px;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-symbol {
+            width: 40px;
+            height: 40px;
+            position: relative;
+        }
+
+        .axis-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .axis-line {
+            position: absolute;
+            background: var(--accent);
+        }
+
+        .axis-vertical {
+            width: 2px;
+            height: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .axis-horizontal {
+            height: 2px;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .axis-point {
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 0 10px rgba(30, 211, 181, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.4rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text);
+            text-transform: uppercase;
+        }
+
+        .logo-text .naxis {
+            font-weight: 700;
+        }
+
+        .logo-text .capital {
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2px;
+            background: var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(7px, 7px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        /* Grid Background */
+        .grid-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(30, 211, 181, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(30, 211, 181, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            pointer-events: none;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 120px 20px 80px;
+            position: relative;
+            background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            max-width: 900px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            color: var(--text);
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero .subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.7;
+            font-weight: 400;
+        }
+
+        .hero .key-message {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin: 2.5rem 0;
+            padding: 1.5rem 2rem;
+            background: rgba(30, 211, 181, 0.05);
+            border-left: 3px solid var(--accent);
+            border-radius: 4px;
+        }
+
+        .hero .intro-text {
+            font-size: 1rem;
+            color: var(--text);
+            line-height: 1.9;
+            margin-bottom: 3rem;
+            text-align: left;
+        }
+
+        .hero .intro-text p {
+            margin-bottom: 1rem;
+        }
+
+        .hero .intro-text strong {
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1.1rem 2.8rem;
+            background: var(--cta);
+            color: var(--primary);
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+            border: none;
+            cursor: pointer;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .cta-button:hover {
+            background: var(--cta-hover);
+            transform: translateY(-2px);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: var(--text);
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        section .section-subtitle {
+            text-align: center;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            margin-bottom: 4rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Alternating Section Backgrounds */
+        section:nth-child(even) {
+            background: var(--secondary);
+        }
+
+        /* Service Cards */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .service-card {
+            background: rgba(30, 211, 181, 0.03);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            padding: 2.5rem;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-5px);
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+            font-weight: 600;
+        }
+
+        .service-card p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .service-card ul {
+            list-style: none;
+            margin-top: 1.5rem;
+        }
+
+        .service-card ul li {
+            color: var(--text);
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+
+        .service-card ul li::before {
+            content: '—';
+            color: var(--accent);
+            position: absolute;
+            left: 0;
+        }
+
+        /* Process Section */
+        .process-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .process-step {
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            flex-shrink: 0;
+            width: 50px;
+            height: 50px;
+            background: rgba(30, 211, 181, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .step-content {
+            flex: 1;
+            background: rgba(30, 211, 181, 0.03);
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .step-content h3 {
+            font-size: 1.4rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .step-content p {
+            color: var(--text-muted);
+            line-height: 1.8;
+        }
+
+        /* Maintenance Section */
+        .maintenance-content {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(30, 211, 181, 0.03);
+            padding: 3rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .maintenance-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .maintenance-item {
+            background: rgba(30, 211, 181, 0.05);
+            padding: 1.5rem;
+            border-radius: 4px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .maintenance-item h4 {
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+            font-weight: 600;
+        }
+
+        .maintenance-note {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-style: italic;
+            border-left: 3px solid var(--text-muted);
+        }
+
+        /* Contact Section */
+        .contact {
+            text-align: center;
+        }
+
+        .contact-content {
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-info {
+            margin-top: 3rem;
+            padding: 3rem;
+            background: rgba(30, 211, 181, 0.03);
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .contact-email {
+            font-size: 1.4rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 1rem;
+            word-break: break-all;
+        }
+
+        .contact-email a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .contact-email a:hover {
+            color: var(--accent-hover);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            text-align: center;
+            padding: 3rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .footer-tagline {
+            color: var(--accent);
+            font-weight: 600;
+            margin-top: 0.5rem;
+        }
+
+        /* Highlight Box */
+        .highlight-box {
+            background: rgba(30, 211, 181, 0.05);
+            border: 2px solid var(--accent);
+            border-radius: 4px;
+            padding: 2rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+
+        .highlight-box p {
+            color: var(--text);
+            font-size: 1.2rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        .highlight-box .emphasis {
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        /* Selected Work Section */
+        .work-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .work-intro {
+            font-size: 1.1rem;
+            color: var(--text);
+            text-align: center;
+            margin-bottom: 3rem;
+            line-height: 1.8;
+        }
+
+        .work-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+
+        .work-item {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            background: rgba(30, 211, 181, 0.03);
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .work-item:hover {
+            border-color: var(--accent);
+            transform: translateX(5px);
+        }
+
+        .work-icon {
+            font-size: 2rem;
+            flex-shrink: 0;
+            width: 50px;
+            text-align: center;
+        }
+
+        .work-details {
+            flex: 1;
+        }
+
+        .work-details h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .work-details p {
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+
+        .work-note {
+            margin-top: 3rem;
+            padding: 1.5rem;
+            background: rgba(30, 211, 181, 0.05);
+            border-left: 3px solid var(--accent);
+            border-radius: 4px;
+            text-align: center;
+        }
+
+        .work-note p {
+            color: var(--text-muted);
+            font-style: italic;
+            font-size: 0.95rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1rem;
+            }
+
+            .hero .key-message {
+                font-size: 1.1rem;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(11, 22, 34, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 30px 30px;
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--border);
+                z-index: 999;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .nav-links li {
+                padding: 1rem 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .nav-links a {
+                display: block;
+                font-size: 1rem;
+            }
+
+            .logo-symbol {
+                width: 32px;
+                height: 32px;
+            }
+
+            .logo-text {
+                font-size: 1.1rem;
+            }
+
+            .axis-point {
+                width: 5px;
+                height: 5px;
+            }
+
+            section h2 {
+                font-size: 1.8rem;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .process-step {
+                flex-direction: column;
+            }
+
+            .step-number {
+                width: 45px;
+                height: 45px;
+                font-size: 1.1rem;
+            }
+
+            .maintenance-list {
+                grid-template-columns: 1fr;
+            }
+
+            .work-item {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .work-icon {
+                width: 100%;
+                text-align: left;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="container">
+            <div class="logo">
+                <div class="logo-symbol">
+                    <div class="axis-lines">
+                        <div class="axis-line axis-vertical"></div>
+                        <div class="axis-line axis-horizontal"></div>
+                        <div class="axis-point"></div>
+                    </div>
+                </div>
+                <div class="logo-text">
+                    <span class="naxis">NAXIS</span> <span class="capital">CAPITAL</span>
+                </div>
+            </div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#services" onclick="closeMenu()">Services</a></li>
+                <li><a href="#work" onclick="closeMenu()">Work</a></li>
+                <li><a href="#process" onclick="closeMenu()">Process</a></li>
+                <li><a href="#maintenance" onclick="closeMenu()">Support</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="grid-bg"></div>
+        <div class="hero-content">
+            <h1><span class="highlight">Turn-Key Blockchain Infrastructure.</span><br>Delivered.</h1>
+            
+            <p class="subtitle">
+                NAXIS CAPITAL designs, builds, and delivers production-ready blockchain networks, tokens, NFT projects, exchange platforms, DApps, Web3 gaming infrastructure, and decentralized applications for clients with capital and clear execution goals.
+            </p>
+
+            <div class="key-message">
+                Clients fund their projects.<br>
+                We deliver the technology.
+            </div>
+
+            <div class="intro-text">
+                <p><strong>NAXIS CAPITAL</strong> is a technology company specialized in end-to-end blockchain infrastructure delivery.</p>
+                
+                <p>We work with clients who are ready to execute serious digital asset projects and require a reliable technical partner capable of delivering secure, scalable, and production-ready systems.</p>
+                
+                <p><strong>We do not raise capital, manage portfolios, or act as intermediaries.</strong></p>
+                
+                <p>Our role is to design, build, and deploy the technology — cleanly and professionally.</p>
+            </div>
+
+            <a href="#contact" class="cta-button">Start a Project</a>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h2>Core Services</h2>
+            <p class="section-subtitle">Comprehensive blockchain infrastructure from architecture to deployment</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <h3>Blockchain Networks</h3>
+                    <p>We design and deliver custom blockchain networks tailored to client requirements.</p>
+                    <ul>
+                        <li>Layer-1 and Layer-2 architectures</li>
+                        <li>Private and permissioned networks</li>
+                        <li>Validator setup and network deployment</li>
+                        <li>Performance and security optimization</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Token Development</h3>
+                    <p>We build secure and scalable token systems aligned with the client's project structure.</p>
+                    <ul>
+                        <li>Smart contract development</li>
+                        <li>Tokenomics implementation</li>
+                        <li>Deployment, testing, and documentation</li>
+                        <li>Security review and launch readiness</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>NFT Projects</h3>
+                    <p>We create complete NFT ecosystems from contract to marketplace.</p>
+                    <ul>
+                        <li>NFT collection development and minting</li>
+                        <li>Custom metadata and rarity systems</li>
+                        <li>Marketplace and trading platforms</li>
+                        <li>Royalty and revenue distribution</li>
+                        <li>Utility integration and membership systems</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Exchange Platforms</h3>
+                    <p>We deliver exchange infrastructure ready for real-world operation.</p>
+                    <ul>
+                        <li>Centralized and hybrid exchange platforms</li>
+                        <li>Decentralized exchange (DEX) protocols</li>
+                        <li>Wallet and custody integration</li>
+                        <li>Liquidity and trading modules</li>
+                        <li>Operational and admin tooling</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>DeFi Applications</h3>
+                    <p>We build decentralized finance protocols and platforms.</p>
+                    <ul>
+                        <li>Staking and yield protocols</li>
+                        <li>Lending and borrowing platforms</li>
+                        <li>Liquidity pool management</li>
+                        <li>Governance mechanisms</li>
+                        <li>Treasury and DAO tooling</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Web3 Gaming</h3>
+                    <p>We develop blockchain-integrated gaming infrastructure and mechanics.</p>
+                    <ul>
+                        <li>Play-to-earn game economies</li>
+                        <li>In-game asset tokenization</li>
+                        <li>NFT-based character and item systems</li>
+                        <li>Marketplace and trading infrastructure</li>
+                        <li>On-chain game logic and verification</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>DApps & Web3 Platforms</h3>
+                    <p>We create decentralized applications for various use cases.</p>
+                    <ul>
+                        <li>Social platforms and communities</li>
+                        <li>Content creation and monetization</li>
+                        <li>Supply chain and tracking systems</li>
+                        <li>Identity and credential platforms</li>
+                        <li>Voting and governance systems</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Launchpads & Presale Systems</h3>
+                    <p>We build token launch infrastructure with security and fairness.</p>
+                    <ul>
+                        <li>Fair launch mechanisms</li>
+                        <li>Anti-bot protection systems</li>
+                        <li>Vesting and lockup contracts</li>
+                        <li>Bonding curve implementations</li>
+                        <li>Social discovery features</li>
+                    </ul>
+                </div>
+
+                <div class="service-card">
+                    <h3>Turn-Key Delivery</h3>
+                    <p>From architecture to deployment across all services.</p>
+                    <ul>
+                        <li>Technical design and architecture</li>
+                        <li>Full-stack development</li>
+                        <li>Smart contract auditing</li>
+                        <li>Production deployment</li>
+                        <li>Complete handover and documentation</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p class="emphasis">Clients receive a finished product — not a prototype.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Selected Work Section -->
+    <section id="work">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h2>Selected Work</h2>
+            <p class="section-subtitle">Production-ready blockchain infrastructure delivered across high-complexity projects</p>
+            
+            <div class="work-content">
+                <p class="work-intro">
+                    We have delivered production-ready blockchain infrastructure across multiple high-complexity projects, including:
+                </p>
+
+                <div class="work-list">
+                    <div class="work-item">
+                        <div class="work-icon">⛓️</div>
+                        <div class="work-details">
+                            <h3>Layer-1 Blockchain Network</h3>
+                            <p>Mainnet delivery with custom consensus and validator infrastructure</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">🪙</div>
+                        <div class="work-details">
+                            <h3>Token Architecture & Issuance</h3>
+                            <p>Complete token systems with on-chain logic and economic models</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">🏦</div>
+                        <div class="work-details">
+                            <h3>Centralized Exchange Backend</h3>
+                            <p>High-performance exchange infrastructure with trading and custody systems</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">💼</div>
+                        <div class="work-details">
+                            <h3>Wallet & Custody Systems</h3>
+                            <p>Secure multi-currency wallet infrastructure and asset management</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">🎮</div>
+                        <div class="work-details">
+                            <h3>NFT Platforms & Web3 Gaming</h3>
+                            <p>Complete NFT ecosystems with gaming integration and marketplace functionality</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">🤖</div>
+                        <div class="work-details">
+                            <h3>AI Integration</h3>
+                            <p>AI-powered blockchain systems and intelligent platform features</p>
+                        </div>
+                    </div>
+
+                    <div class="work-item">
+                        <div class="work-icon">⚙️</div>
+                        <div class="work-details">
+                            <h3>Post-Launch Support</h3>
+                            <p>Maintenance, scaling, and upgrade services for live production systems</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="work-note">
+                    <p>Projects delivered under NDA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section id="process">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h2>How We Work</h2>
+            <p class="section-subtitle">Structured execution from concept to production</p>
+            
+            <div class="process-steps">
+                <div class="process-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Scope & Requirements</h3>
+                        <p>The client defines the project objectives, budget range, and timeline. We align on technical scope and delivery expectations.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Architecture & Proposal</h3>
+                        <p>We design the system architecture and delivery structure. A clear proposal outlines milestones, responsibilities, and timelines.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Development & Milestones</h3>
+                        <p>Development is executed in defined phases with measurable deliverables. Progress is transparent and milestone-based.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Deployment & Handover</h3>
+                        <p>The system is deployed to production. The client receives code, documentation, and operational access.</p>
+                    </div>
+                </div>
+
+                <div class="process-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Optional Maintenance</h3>
+                        <p>Clients may continue independently or engage us for ongoing support.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <p>Execution is structured. Delivery is controlled.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Maintenance Section -->
+    <section id="maintenance">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <h2>Ongoing Support</h2>
+            <p class="section-subtitle">Optional maintenance and technical support after delivery</p>
+            
+            <div class="maintenance-content">
+                <p style="color: var(--text); font-size: 1rem; margin-bottom: 2rem; line-height: 1.8;">
+                    After delivery, clients may choose to operate their systems independently or retain NAXIS CAPITAL for ongoing technical support under a separate agreement.
+                </p>
+
+                <div class="maintenance-list">
+                    <div class="maintenance-item">
+                        <h4>System Monitoring</h4>
+                    </div>
+                    <div class="maintenance-item">
+                        <h4>Upgrades & Extensions</h4>
+                    </div>
+                    <div class="maintenance-item">
+                        <h4>Security Updates</h4>
+                    </div>
+                    <div class="maintenance-item">
+                        <h4>Performance Optimization</h4>
+                    </div>
+                    <div class="maintenance-item">
+                        <h4>Scaling Support</h4>
+                    </div>
+                </div>
+
+                <div class="maintenance-note">
+                    Maintenance is optional and fully separated from development delivery.
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="grid-bg"></div>
+        <div class="container">
+            <div class="contact-content">
+                <h2>Start a Conversation</h2>
+                <p class="section-subtitle">
+                    We work with clients who are prepared to execute serious blockchain infrastructure projects.
+                </p>
+
+                <div class="contact-info">
+                    <p style="color: var(--text); font-size: 1rem; line-height: 1.8;">
+                        If you are planning to build a network, token system, NFT project, exchange platform, DeFi protocol, Web3 game, or decentralized application and require a reliable delivery partner, we are available for an initial discussion.
+                    </p>
+                    
+                    <div style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border);">
+                        <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px;">Contact</p>
+                        <p class="contact-email">
+                            <a href="mailto:contact@naxiscapital.com">contact@naxiscapital.com</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Naxis Capital</p>
+            <p class="footer-tagline">Turn-Key Blockchain Infrastructure. Delivered.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Hamburger menu toggle
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            navLinks.classList.remove('active');
+            hamburger.classList.remove('active');
+        }
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Subtle nav shadow on scroll
+        window.addEventListener('scroll', () => {
+            const nav = document.querySelector('nav');
+            if (window.pageYOffset > 50) {
+                nav.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.3)';
+            } else {
+                nav.style.boxShadow = 'none';
+            }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const navLinks = document.querySelector('.nav-links');
+            const hamburger = document.querySelector('.hamburger');
+            const nav = document.querySelector('nav');
+            
+            if (!nav.contains(e.target) && navLinks.classList.contains('active')) {
+                closeMenu();
+            }
+        });
+    </script>
+</body>
+</html>
