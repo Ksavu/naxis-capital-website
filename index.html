@@ -1394,21 +1394,11 @@ ${formData.get('description')}
 
             try {
                 // Using FormSubmit.co service - free email forwarding
-                const response = await fetch('https://formsubmit.co/contact@naxis.capital', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        name: formData.get('name'),
-                        email: formData.get('email'),
-                        message: emailBody,
-                        _subject: `New Project Inquiry - ${formData.get('project_type')}`,
-                        _captcha: 'false',
-                        _template: 'table'
-                    })
-                });
+                const response = await fetch("/api/contact", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(Object.fromEntries(formData)),
+  });
 
                 if (response.ok) {
                     messageDiv.className = 'form-message success';
