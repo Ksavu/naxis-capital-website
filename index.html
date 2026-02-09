@@ -4,8 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Naxis Capital - Turn-Key Blockchain Infrastructure</title>
-    <link rel="icon" type="image/svg+xml" href="favicon.svg">
-    <style>
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<!-- Font Awesome za ikone -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
         * {
             margin: 0;
             padding: 0;
@@ -126,6 +128,32 @@
             display: flex;
             gap: 2.5rem;
             list-style: none;
+        }
+
+        /* Social Icons - Header */
+        .social-icons-header {
+            display: flex;
+            gap: 1.2rem;
+            align-items: center;
+            margin-left: 2rem;
+        }
+
+        .social-icon {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .social-icon:hover {
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .nav-content {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
         }
 
         .nav-links a {
@@ -676,6 +704,35 @@
             color: var(--accent);
             font-weight: 600;
             margin-top: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+    /* Social Icons - Footer */
+        .social-icons-footer {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0 3rem;
+        }
+
+        .footer-social-icon {
+            color: var(--text-muted);
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .footer-social-icon:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.85rem;
         }
 
         /* Highlight Box */
@@ -869,6 +926,46 @@
                 text-align: left;
             }
         }
+            /* Social icons responsive */
+            .social-icons-header {
+                margin-left: 0;
+                justify-content: center;
+                width: 100%;
+                margin-top: 2rem;
+                padding-top: 2rem;
+                border-top: 1px solid var(--border);
+            }
+
+            .nav-content {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                height: 100vh;
+                width: 70%;
+                max-width: 300px;
+                background: rgba(11, 22, 34, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                gap: 0;
+                padding: 80px 30px 30px;
+                transition: right 0.3s ease;
+                border-left: 1px solid var(--border);
+                z-index: 999;
+            }
+
+            .nav-content.active {
+                right: 0;
+            }
+
+            .social-icons-footer {
+                flex-wrap: wrap;
+                gap: 1rem;
+                margin: 1.5rem 0 2rem;
+            }
+
+            .footer-social-icon {
+                font-size: 1.1rem;
+            }
 
         /* Smooth Scroll */
         html {
@@ -897,6 +994,7 @@
                 <span></span>
                 <span></span>
             </div>
+            <div class="nav-content">
             <ul class="nav-links">
                 <li><a href="#services" onclick="closeMenu()">Services</a></li>
                 <li><a href="#work" onclick="closeMenu()">Work</a></li>
@@ -904,6 +1002,25 @@
                 <li><a href="#maintenance" onclick="closeMenu()">Support</a></li>
                 <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
             </ul>
+            
+            <!-- Social Icons in Header -->
+            <div class="social-icons-header">
+                 <a href="https://x.com" target="_blank" class="social-icon" title="X">
+                 <i class="fab fa-x-twitter"></i>
+            </a>
+                 <a href="https://linkedin.com" target="_blank" class="social-icon" title="LinkedIn">
+                 <i class="fab fa-linkedin-in"></i>
+            </a>
+                 <a href="https://github.com" target="_blank" class="social-icon" title="GitHub">
+                 <i class="fab fa-github"></i>
+            </a>
+                 <a href="https://t.me" target="_blank" class="social-icon" title="Telegram">
+                 <i class="fab fa-telegram-plane"></i>
+            </a>
+                 <a href="https://wa.me" target="_blank" class="social-icon" title="WhatsApp">
+                 <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
         </div>
     </nav>
 
@@ -1335,11 +1452,32 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p>&copy; 2026 Naxis Capital</p>
-            <p class="footer-tagline">Turn-Key Blockchain Infrastructure. Delivered.</p>
+    <div class="container">
+        <p>&copy; 2026 Naxis Capital</p>
+        <p class="footer-tagline">Turn-Key Blockchain Infrastructure. Delivered.</p>
+        
+        <!-- Social Icons in Footer -->
+        <div class="social-icons-footer">
+            <a href="https://x.com" target="_blank" class="footer-social-icon" title="X">
+                <i class="fab fa-x-twitter"></i>
+            </a>
+            <a href="https://linkedin.com" target="_blank" class="footer-social-icon" title="LinkedIn">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://github.com" target="_blank" class="footer-social-icon" title="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="https://t.me" target="_blank" class="footer-social-icon" title="Telegram">
+                <i class="fab fa-telegram-plane"></i>
+            </a>
+            <a href="https://wa.me" target="_blank" class="footer-social-icon" title="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
         </div>
-    </footer>
+        
+        <p class="copyright">Follow us on social media for updates</p>
+    </div>
+</footer>
 
     <script>
         // Modal functions
@@ -1426,19 +1564,19 @@ ${formData.get('description')}
 
         // Hamburger menu toggle
         function toggleMenu() {
-            const navLinks = document.querySelector('.nav-links');
+            const navContent = document.querySelector('.nav-content');
             const hamburger = document.querySelector('.hamburger');
-            navLinks.classList.toggle('active');
+            navContent.classList.toggle('active');
             hamburger.classList.toggle('active');
         }
 
         function closeMenu() {
-            const navLinks = document.querySelector('.nav-links');
+            const navContent = document.querySelector('.nav-content');
             const hamburger = document.querySelector('.hamburger');
-            navLinks.classList.remove('active');
+            navContent.classList.remove('active');
             hamburger.classList.remove('active');
         }
-
+        
         // Smooth scroll for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
